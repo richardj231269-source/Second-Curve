@@ -42,12 +42,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 64px;
+  padding: 16px 64px;
   transition: background 0.4s, padding 0.3s, box-shadow 0.3s;
 }
 nav.scrolled {
   background: rgba(247,244,239,0.96);
-  padding: 18px 64px;
+  padding: 12px 64px;
   box-shadow: 0 1px 0 var(--rule);
   backdrop-filter: blur(12px);
 }
@@ -57,10 +57,9 @@ nav.scrolled {
   align-items: center;
 }
 .nav-wordmark-img {
-  height: 64px;
+  height: 88px;
   width: auto;
   display: block;
-  mix-blend-mode: multiply;
 }
 .nav-links {
   display: flex;
@@ -68,9 +67,9 @@ nav.scrolled {
   list-style: none;
 }
 .nav-links a {
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-mid);
   text-decoration: none;
@@ -514,15 +513,15 @@ footer {
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  nav, nav.scrolled { padding: 20px 40px; }
-  .nav-wordmark-img { height: 52px; }
+  nav, nav.scrolled { padding: 14px 40px; }
+  .nav-wordmark-img { height: 72px; }
   .hero { grid-template-columns: 1fr; min-height: 100svh; }
   .hero-text { padding: 120px 40px 56px; }
   .hero-photo { height: 60vw; min-height: 320px; }
 }
 @media (max-width: 768px) {
-  nav, nav.scrolled { padding: 18px 24px; }
-  .nav-wordmark-img { height: 40px; }
+  nav, nav.scrolled { padding: 12px 24px; }
+  .nav-wordmark-img { height: 56px; }
   .nav-links { gap: 24px; }
   .hero-text { padding: 100px 24px 48px; }
   .hero-photo { height: 72vw; }
@@ -546,7 +545,7 @@ footer {
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-wordmark">
-    <img src="wordmark.png" alt="Second Curve — Strategic Advisory" class="nav-wordmark-img">
+    <img src="wordmark-transparent.svg" alt="Second Curve — Strategic Advisory" class="nav-wordmark-img">
   </a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
