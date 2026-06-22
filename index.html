@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
 
-/* ─── TOKENS — exact brand guidelines values ─────────────── */
+/* ─── TOKENS ─────────────────────────────────────────────── */
 :root {
   --warm-white:  #F7F4EF;
   --cream:       #F0EDE7;
@@ -17,7 +17,7 @@
   --ink-mid:     #5A5955;
   --ink-light:   #8C8A86;
   --rule:        rgba(42,42,39,0.1);
-  --rule-dark:   rgba(247,244,239,0.08);
+  --rule-dark:   rgba(247,244,239,0.09);
   --serif: 'EB Garamond', Georgia, serif;
   --sans:  'DM Sans', system-ui, sans-serif;
 }
@@ -42,12 +42,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 64px;
+  padding: 28px 64px;
   transition: background 0.4s, padding 0.3s, box-shadow 0.3s;
 }
 nav.scrolled {
   background: rgba(247,244,239,0.96);
-  padding: 16px 64px;
+  padding: 18px 64px;
   box-shadow: 0 1px 0 var(--rule);
   backdrop-filter: blur(12px);
 }
@@ -57,7 +57,7 @@ nav.scrolled {
   align-items: center;
 }
 .nav-wordmark-img {
-  height: 44px;
+  height: 64px;
   width: auto;
   display: block;
   mix-blend-mode: multiply;
@@ -83,21 +83,20 @@ nav.scrolled {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: end;
-  padding: 0 64px 72px;
-  position: relative;
   background: var(--warm-white);
   overflow: hidden;
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 50% 65% at 100% 0%, rgba(184,133,30,0.06) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero-text { position: relative; z-index: 1; }
 
+/* Left column: text */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 80px 64px;
+  padding-top: 140px;
+  position: relative;
+  z-index: 1;
+}
 .hero-label {
   display: inline-block;
   font-size: 0.62rem;
@@ -110,11 +109,12 @@ nav.scrolled {
 }
 .hero-headline {
   font-family: var(--serif);
-  font-size: clamp(2.8rem, 5vw, 5.4rem);
+  font-size: clamp(3rem, 5vw, 5.6rem);
   font-weight: 400;
-  line-height: 1.06;
+  line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--charcoal);
+  margin-bottom: 20px;
   opacity: 0;
   animation: riseIn 0.8s ease 0.5s forwards;
 }
@@ -122,23 +122,22 @@ nav.scrolled {
   font-style: italic;
   color: var(--amber);
 }
-
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 6px;
-  padding-left: 72px;
-  position: relative;
-  z-index: 1;
+.hero-strapline {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: riseIn 0.8s ease 0.65s forwards;
 }
 .hero-body {
   font-size: 0.97rem;
   font-weight: 300;
   color: var(--ink-mid);
   line-height: 1.85;
-  max-width: 360px;
-  margin-bottom: 40px;
+  max-width: 400px;
+  margin-bottom: 44px;
   opacity: 0;
   animation: riseIn 0.8s ease 0.75s forwards;
 }
@@ -149,6 +148,30 @@ nav.scrolled {
   opacity: 0;
   animation: riseIn 0.8s ease 0.95s forwards;
 }
+
+/* Right column: full-bleed portrait */
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.4s forwards;
+}
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--warm-white) 0%, transparent 18%),
+              linear-gradient(to top, rgba(42,42,39,0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+
 .btn-primary {
   font-size: 0.65rem;
   font-weight: 500;
@@ -183,21 +206,6 @@ nav.scrolled {
 }
 .btn-text:hover::after { transform: scaleX(1); }
 
-.hero-deco {
-  position: absolute;
-  right: 64px;
-  bottom: -24px;
-  font-family: var(--serif);
-  font-size: clamp(160px, 20vw, 260px);
-  font-weight: 400;
-  font-style: italic;
-  color: rgba(184,133,30,0.055);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.04em;
-}
-
 /* ─── SECTION UTILITIES ──────────────────────────────────── */
 .section-eyebrow {
   font-size: 0.6rem;
@@ -211,7 +219,7 @@ nav.scrolled {
 
 /* ─── WHAT I DO ──────────────────────────────────────────── */
 .what-section {
-  padding: 88px 64px;
+  padding: 96px 64px;
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: 80px;
@@ -225,10 +233,7 @@ nav.scrolled {
   line-height: 1.14;
   color: var(--charcoal);
 }
-.what-left h2 em {
-  font-style: italic;
-  color: var(--ink-mid);
-}
+.what-left h2 em { font-style: italic; color: var(--ink-mid); }
 .what-right p {
   font-size: 0.97rem;
   font-weight: 300;
@@ -242,7 +247,7 @@ nav.scrolled {
 /* ─── THESIS ─────────────────────────────────────────────── */
 .thesis-section {
   background: var(--charcoal);
-  padding: 88px 64px;
+  padding: 96px 64px;
   position: relative;
   overflow: hidden;
 }
@@ -251,7 +256,7 @@ nav.scrolled {
   position: absolute;
   inset: 0;
   background: url('images/shadow-light.jpg') center center / cover no-repeat;
-  opacity: 0.1;
+  opacity: 0.22;
   pointer-events: none;
 }
 .thesis-inner {
@@ -268,26 +273,13 @@ nav.scrolled {
   line-height: 1.4;
   color: var(--warm-white);
 }
-.thesis-quote strong {
-  font-style: normal;
-  font-weight: 500;
-  color: var(--amber);
-}
-.thesis-rule {
-  width: 32px; height: 1px;
-  background: rgba(184,133,30,0.35);
-  margin: 36px 0 24px;
-}
-.thesis-close {
-  font-size: 0.82rem;
-  color: rgba(247,244,239,0.38);
-  font-weight: 300;
-  letter-spacing: 0.06em;
-}
+.thesis-quote strong { font-style: normal; font-weight: 500; color: var(--amber); }
+.thesis-rule { width: 32px; height: 1px; background: rgba(184,133,30,0.35); margin: 36px 0 24px; }
+.thesis-close { font-size: 0.82rem; color: rgba(247,244,239,0.38); font-weight: 300; letter-spacing: 0.06em; }
 
 /* ─── WHERE I WORK ───────────────────────────────────────── */
 .work-section {
-  padding: 88px 64px;
+  padding: 96px 64px;
   border-top: 1px solid var(--rule);
 }
 .work-header {
@@ -303,12 +295,7 @@ nav.scrolled {
   font-weight: 400;
   line-height: 1.16;
 }
-.work-header p {
-  font-size: 0.93rem;
-  color: var(--ink-mid);
-  line-height: 1.85;
-  font-weight: 300;
-}
+.work-header p { font-size: 0.93rem; color: var(--ink-mid); line-height: 1.85; font-weight: 300; }
 .work-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -321,33 +308,15 @@ nav.scrolled {
   transition: background 0.25s;
 }
 .work-card:hover { background: var(--cream); }
-.work-card-label {
-  font-size: 0.58rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 14px;
-}
-.work-card h3 {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--charcoal);
-  margin-bottom: 12px;
-  line-height: 1.25;
-}
-.work-card p {
-  font-size: 0.86rem;
-  color: var(--ink-mid);
-  line-height: 1.78;
-  font-weight: 300;
-}
+.work-card-label { font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+.work-card h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--charcoal); margin-bottom: 12px; line-height: 1.25; }
+.work-card p { font-size: 0.86rem; color: var(--ink-mid); line-height: 1.78; font-weight: 300; }
 .work-card-so-what {
   margin-top: 18px;
   padding-top: 16px;
   border-top: 1px solid var(--rule);
   font-family: var(--serif);
-  font-size: 0.93rem;
+  font-size: 0.95rem;
   font-style: italic;
   color: var(--charcoal);
   line-height: 1.6;
@@ -357,7 +326,7 @@ nav.scrolled {
 /* ─── HESITATION GAP ─────────────────────────────────────── */
 .hg-section {
   background: var(--charcoal);
-  padding: 104px 64px;
+  padding: 112px 64px;
   position: relative;
   overflow: hidden;
 }
@@ -366,7 +335,7 @@ nav.scrolled {
   position: absolute;
   inset: 0;
   background: url('images/window-light.jpg') center center / cover no-repeat;
-  opacity: 0.09;
+  opacity: 0.2;
   pointer-events: none;
 }
 .hg-inner {
@@ -385,17 +354,8 @@ nav.scrolled {
   color: var(--warm-white);
   margin-bottom: 24px;
 }
-.hg-left h2 em {
-  font-style: italic;
-  color: var(--amber);
-}
-.hg-left p {
-  font-size: 0.93rem;
-  color: rgba(247,244,239,0.5);
-  line-height: 1.88;
-  font-weight: 300;
-  margin-bottom: 32px;
-}
+.hg-left h2 em { font-style: italic; color: var(--amber); }
+.hg-left p { font-size: 0.93rem; color: rgba(247,244,239,0.55); line-height: 1.88; font-weight: 300; margin-bottom: 32px; }
 .hg-link {
   font-size: 0.65rem;
   letter-spacing: 0.22em;
@@ -409,11 +369,7 @@ nav.scrolled {
 }
 .hg-link:hover { gap: 16px; }
 .hg-link::after { content: '→'; }
-
-.hg-right {
-  border-left: 1px solid var(--rule-dark);
-  padding-left: 60px;
-}
+.hg-right { border-left: 1px solid var(--rule-dark); padding-left: 60px; }
 .hg-pull {
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.65rem);
@@ -425,7 +381,7 @@ nav.scrolled {
 }
 .hg-definition {
   font-size: 0.84rem;
-  color: rgba(247,244,239,0.4);
+  color: rgba(247,244,239,0.45);
   line-height: 1.88;
   font-weight: 300;
   padding-top: 24px;
@@ -434,7 +390,7 @@ nav.scrolled {
 
 /* ─── ABOUT ──────────────────────────────────────────────── */
 .about-section {
-  padding: 88px 64px;
+  padding: 96px 64px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 88px;
@@ -454,14 +410,7 @@ nav.scrolled {
   object-position: center top;
   display: block;
 }
-.about-photo-caption {
-  margin-top: 16px;
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-}
-
+.about-photo-caption { margin-top: 16px; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); }
 .about-content { padding-top: 4px; }
 .about-content .section-eyebrow { margin-bottom: 20px; }
 .about-content blockquote {
@@ -475,38 +424,11 @@ nav.scrolled {
   padding-left: 24px;
   margin-bottom: 32px;
 }
-.about-content p {
-  font-size: 0.93rem;
-  color: var(--ink-mid);
-  line-height: 1.88;
-  font-weight: 300;
-  margin-bottom: 18px;
-}
-.about-ventures {
-  margin: 32px 0;
-  border-top: 1px solid var(--rule);
-}
-.venture-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule);
-}
-.venture-name {
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: var(--charcoal);
-}
-.venture-desc {
-  font-size: 0.76rem;
-  color: var(--ink-light);
-  font-weight: 300;
-  text-align: right;
-  max-width: 200px;
-  line-height: 1.5;
-}
+.about-content p { font-size: 0.93rem; color: var(--ink-mid); line-height: 1.88; font-weight: 300; margin-bottom: 18px; }
+.about-ventures { margin: 32px 0; border-top: 1px solid var(--rule); }
+.venture-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.venture-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--charcoal); }
+.venture-desc { font-size: 0.76rem; color: var(--ink-light); font-weight: 300; text-align: right; max-width: 200px; line-height: 1.5; }
 .about-link {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
@@ -525,13 +447,10 @@ nav.scrolled {
 /* ─── CONTACT ────────────────────────────────────────────── */
 .contact-section {
   background: var(--charcoal);
-  padding: 104px 64px;
+  padding: 112px 64px;
   text-align: center;
 }
-.contact-inner {
-  max-width: 520px;
-  margin: 0 auto;
-}
+.contact-inner { max-width: 520px; margin: 0 auto; }
 .contact-inner .section-eyebrow { color: rgba(184,133,30,0.65); }
 .contact-inner h2 {
   font-family: var(--serif);
@@ -541,17 +460,8 @@ nav.scrolled {
   color: var(--warm-white);
   margin-bottom: 24px;
 }
-.contact-inner h2 em {
-  font-style: italic;
-  color: var(--amber);
-}
-.contact-inner p {
-  font-size: 0.93rem;
-  color: rgba(247,244,239,0.45);
-  line-height: 1.85;
-  font-weight: 300;
-  margin-bottom: 48px;
-}
+.contact-inner h2 em { font-style: italic; color: var(--amber); }
+.contact-inner p { font-size: 0.93rem; color: rgba(247,244,239,0.45); line-height: 1.85; font-weight: 300; margin-bottom: 48px; }
 .contact-email {
   font-family: var(--serif);
   font-size: clamp(1.1rem, 2.3vw, 1.7rem);
@@ -563,53 +473,30 @@ nav.scrolled {
   padding-bottom: 4px;
   transition: color 0.2s, border-color 0.2s;
 }
-.contact-email:hover {
-  color: var(--amber);
-  border-color: var(--amber);
-}
-.contact-meta {
-  margin-top: 44px;
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: rgba(247,244,239,0.2);
-}
+.contact-email:hover { color: var(--amber); border-color: var(--amber); }
+.contact-meta { margin-top: 44px; font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(247,244,239,0.2); }
 
 /* ─── FOOTER ─────────────────────────────────────────────── */
 footer {
   background: var(--charcoal);
   border-top: 1px solid var(--rule-dark);
-  padding: 24px 64px;
+  padding: 28px 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.footer-mark {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.3;
-  transition: opacity 0.2s;
-}
-.footer-mark:hover { opacity: 0.5; }
+.footer-mark { text-decoration: none; display: inline-flex; align-items: center; }
 .footer-wordmark-img {
-  height: 20px;
+  height: 32px;
   width: auto;
   display: block;
   filter: brightness(0) invert(1);
+  opacity: 0.45;
 }
-.footer-copy {
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  color: rgba(247,244,239,0.18);
-}
+.footer-copy { font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(247,244,239,0.2); }
 
 /* ─── SCROLL REVEAL ──────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
@@ -620,41 +507,37 @@ footer {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
-@media (max-width: 960px) {
-  nav, nav.scrolled { padding: 20px 32px; }
-  .nav-links { gap: 28px; }
-  .nav-wordmark-img { height: 36px; }
-
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 120px 32px 64px;
-    min-height: 100svh;
-  }
-  .hero-right { padding-left: 0; padding-top: 36px; }
-  .hero-deco { font-size: 130px; right: 32px; bottom: -12px; }
-
-  .what-section,
-  .work-header,
-  .hg-inner,
-  .about-section { grid-template-columns: 1fr; gap: 40px; }
-
-  .what-section,
-  .work-section,
-  .hg-section,
-  .about-section,
-  .contact-section,
-  .thesis-section { padding: 64px 32px; }
-
-  .work-grid { grid-template-columns: 1fr; }
-  .hg-right { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-dark); padding-top: 36px; }
-  footer { flex-direction: column; gap: 10px; padding: 20px 32px; text-align: center; }
+@media (max-width: 1024px) {
+  nav, nav.scrolled { padding: 20px 40px; }
+  .nav-wordmark-img { height: 52px; }
+  .hero { grid-template-columns: 1fr; min-height: 100svh; }
+  .hero-text { padding: 120px 40px 56px; }
+  .hero-photo { height: 60vw; min-height: 320px; }
 }
-@media (max-width: 600px) {
-  .nav-links { display: none; }
+@media (max-width: 768px) {
+  nav, nav.scrolled { padding: 18px 24px; }
+  .nav-wordmark-img { height: 40px; }
+  .nav-links { gap: 24px; }
+  .hero-text { padding: 100px 24px 48px; }
+  .hero-photo { height: 72vw; }
+  .what-section, .about-section { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
+  .work-header { grid-template-columns: 1fr; gap: 24px; }
+  .work-section, .hg-section, .contact-section, .thesis-section { padding: 64px 24px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .hg-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hg-right { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-dark); padding-top: 36px; }
+  footer { flex-direction: column; gap: 12px; padding: 20px 24px; text-align: center; }
   .venture-row { flex-direction: column; gap: 4px; }
   .venture-desc { text-align: left; }
+}
+@media (max-width: 540px) {
+  .nav-links { display: none; }
 }
 </style>
 </head>
@@ -683,8 +566,7 @@ footer {
       problem.<br>
       <span class="accent">Hesitation is.</span>
     </h1>
-  </div>
-  <div class="hero-right">
+    <p class="hero-strapline">Building what comes next.</p>
     <p class="hero-body">
       I work with founders and leadership teams when growth has stalled, complexity has outpaced structure, or the business has outgrown the way it used to operate.
     </p>
@@ -693,7 +575,10 @@ footer {
       <a href="#contact" class="btn-text">Start a conversation</a>
     </div>
   </div>
-  <div class="hero-deco" aria-hidden="true">2</div>
+  <div class="hero-photo">
+    <img src="images/richard-jones.jpeg" alt="Richard Jones, Founder of Second Curve">
+    <div class="hero-photo-overlay"></div>
+  </div>
 </section>
 
 <!-- WHAT I DO -->
@@ -704,15 +589,9 @@ footer {
     <h2>Operator thinking.<br><em>At the moment<br>it matters most.</em></h2>
   </div>
   <div class="what-right reveal reveal-delay-1">
-    <p>
-      Most advisory relationships begin too late — after the drift has set in, the decisions have been delayed, the window has narrowed. <strong>I enter earlier.</strong>
-    </p>
-    <p>
-      I bring operational judgement, not strategic opinion. The difference is material: I have built businesses, navigated governance under pressure, managed complex integrations, and led through the kind of organisational difficulty that frameworks alone cannot resolve.
-    </p>
-    <p>
-      I work with founders, PE-backed leadership teams, boards and investors who need more than a well-structured presentation. They need someone who has been in the room — and who isn't afraid to say what they see.
-    </p>
+    <p>Most advisory relationships begin too late — after the drift has set in, the decisions have been delayed, the window has narrowed. <strong>I enter earlier.</strong></p>
+    <p>I bring operational judgement, not strategic opinion. The difference is material: I have built businesses, navigated governance under pressure, managed complex integrations, and led through the kind of organisational difficulty that frameworks alone cannot resolve.</p>
+    <p>I work with founders, PE-backed leadership teams, boards and investors who need more than a well-structured presentation. They need someone who has been in the room — and who isn't afraid to say what they see.</p>
   </div>
 </section>
 
@@ -720,9 +599,7 @@ footer {
 <section class="thesis-section">
   <div class="thesis-inner reveal">
     <span class="section-eyebrow">A Guiding Belief</span>
-    <p class="thesis-quote">
-      "Businesses rarely fail because of lack of ambition. They fragment because <strong>complexity grows faster than organisational capability.</strong>"
-    </p>
+    <p class="thesis-quote">"Businesses rarely fail because of lack of ambition. They fragment because <strong>complexity grows faster than organisational capability.</strong>"</p>
     <div class="thesis-rule"></div>
     <p class="thesis-close">The Second Curve Thesis</p>
   </div>
@@ -736,9 +613,7 @@ footer {
       <div class="rule-short"></div>
       <h2>The situations<br>I'm built for.</h2>
     </div>
-    <p class="reveal reveal-delay-1">
-      I don't offer a menu of services. I engage in situations where operational experience, honest diagnosis and decisive thinking make the material difference.
-    </p>
+    <p class="reveal reveal-delay-1">I don't offer a menu of services. I engage in situations where operational experience, honest diagnosis and decisive thinking make the material difference.</p>
   </div>
   <div class="work-grid">
     <div class="work-card reveal">
@@ -786,18 +661,12 @@ footer {
     <div class="hg-left reveal">
       <span class="section-eyebrow">A Framework for Stalled Businesses</span>
       <h2>The <em>Hesitation</em><br>Gap.</h2>
-      <p>
-        One of the most consistent patterns in businesses under pressure is not a lack of strategic clarity — it is the gap between understanding what must change and the willingness to act on it.
-      </p>
+      <p>One of the most consistent patterns in businesses under pressure is not a lack of strategic clarity — it is the gap between understanding what must change and the willingness to act on it.</p>
       <a href="#" class="hg-link">Read the full framework</a>
     </div>
     <div class="hg-right reveal reveal-delay-1">
-      <p class="hg-pull">
-        "When leaders have strategic clarity but delay decisive action — creating controlled drift until forced action becomes the only option."
-      </p>
-      <p class="hg-definition">
-        The Hesitation Gap describes the period in which a business knows what it must do but remains held back by relational, structural or identity-entangled forces. The longer the gap, the narrower the window. Second Curve is designed to close it.
-      </p>
+      <p class="hg-pull">"When leaders have strategic clarity but delay decisive action — creating controlled drift until forced action becomes the only option."</p>
+      <p class="hg-definition">The Hesitation Gap describes the period in which a business knows what it must do but remains held back by relational, structural or identity-entangled forces. The longer the gap, the narrower the window. Second Curve is designed to close it.</p>
     </div>
   </div>
 </section>
@@ -812,15 +681,9 @@ footer {
   </div>
   <div class="about-content reveal reveal-delay-1">
     <span class="section-eyebrow">About</span>
-    <blockquote>
-      "No one can buy experience when it comes to starting, scaling or failing a business. I've had the privilege, and sometimes the bruises, of doing all three."
-    </blockquote>
-    <p>
-      I founded Second Curve after more than two decades operating inside businesses of genuine complexity — across the Middle East, the UK and the Netherlands. My background spans regulated healthcare, international FMCG, and founder-led scaling environments.
-    </p>
-    <p>
-      Second Curve was built because the most useful person in a difficult business situation is rarely the most qualified on paper. It is the one who has navigated that terrain before — and who isn't afraid to say what they see.
-    </p>
+    <blockquote>"No one can buy experience when it comes to starting, scaling or failing a business. I've had the privilege, and sometimes the bruises, of doing all three."</blockquote>
+    <p>I founded Second Curve after more than two decades operating inside businesses of genuine complexity — across the Middle East, the UK and the Netherlands. My background spans regulated healthcare, international FMCG, and founder-led scaling environments.</p>
+    <p>Second Curve was built because the most useful person in a difficult business situation is rarely the most qualified on paper. It is the one who has navigated that terrain before — and who isn't afraid to say what they see.</p>
     <div class="about-ventures">
       <div class="venture-row">
         <span class="venture-name">Coffee Planet</span>
@@ -844,10 +707,7 @@ footer {
   <div class="contact-inner reveal">
     <span class="section-eyebrow">Start a Conversation</span>
     <h2>The right moment<br>to act is rarely<br><em>obvious.</em></h2>
-    <p>
-      I work with a small number of engagements at any time.<br>
-      If the situation feels right, the conversation is always worth having.
-    </p>
+    <p>I work with a small number of engagements at any time.<br>If the situation feels right, the conversation is always worth having.</p>
     <a href="mailto:richard@secondcurve.nl" class="contact-email">richard@secondcurve.nl</a>
     <p class="contact-meta">Amsterdam · secondcurve.nl</p>
   </div>
